@@ -38,6 +38,8 @@ class chieff_currencies extends CModule {
 
         $this->MODULE_ID = "chieff.currencies";
 
+        $this->COMPONENTS_PATH = $_SERVER["DOCUMENT_ROOT"] . "/local/components";
+
         $this->MODULE_VERSION = $arModuleVersion["VERSION"];
         $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
         $this->MODULE_NAME = Loc::getMessage("CHIEFF_CURRENCIES_MODULE_NAME");
@@ -68,9 +70,11 @@ class chieff_currencies extends CModule {
         );
         if (!$res)
             $resMsg = Loc::getMessage("CHIEFF_CURRENCIES_INSTALL_ERROR_FILES_ADM");
+        if (!is_dir($this->COMPONENTS_PATH))
+            mkdir($this->COMPONENTS_PATH, 0777, true);
         $res = CopyDirFiles(
             __DIR__ . "/components",
-            $_SERVER["DOCUMENT_ROOT"] . "/bitrix/components",
+            $this->COMPONENTS_PATH,
             true,
             true
         );
@@ -118,8 +122,8 @@ class chieff_currencies extends CModule {
             __DIR__ . "/admin",
             $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin"
         );
-        if (is_dir($_SERVER["DOCUMENT_ROOT"] . "/bitrix/components/" . $this->MODULE_ID))
-            $res = DeleteDirFilesEx("/bitrix/components/" . $this->MODULE_ID);
+        if (is_dir($this->COMPONENTS_PATH . "/" . $this->MODULE_ID))
+            $res = DeleteDirFilesEx("/local/components/" . $this->MODULE_ID);
         if (!$res)
             $resMsg = Loc::getMessage("CHIEFF_CURRENCIES_UNINSTALL_ERROR_FILES_COM");
         if ($resMsg) {
