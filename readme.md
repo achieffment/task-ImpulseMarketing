@@ -38,7 +38,7 @@ $APPLICATION->IncludeComponent(
 		"CACHE_TIME" => "3600",
 		"CACHE_TYPE" => "A",
 		"COMPONENT_TEMPLATE" => ".default",
-		"PAGER_COUNT" => "10",
+		"ELEMENTS_COUNT" => "10",
 		"SET_TITLE" => "Y"
 	),
 null
