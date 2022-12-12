@@ -3,7 +3,6 @@ use \Bitrix\Main\Localization\Loc;
 if (!check_bitrix_sessid())
     return;
 if ($ex = $APPLICATION->GetException())
-    // Выводим ошибку
     echo CAdminMessage::ShowMessage(array(
         "TYPE" => "ERROR",
         "MESSAGE" => Loc::getMessage("MOD_UNINST_ERR"),

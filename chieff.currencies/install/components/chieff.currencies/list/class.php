@@ -3,11 +3,8 @@
 use \Bitrix\Main\Loader;
 use \Bitrix\Main\Localization\Loc;
 use \Bitrix\Main\Type;
-use \chieff\books\BookTable;
-use \chieff\books\AuthorTable;
 
 class Book extends CBitrixComponent {
-
 
     protected function checkModule() {
         if (!Loader::includeModule("chieff.currencies")) {
