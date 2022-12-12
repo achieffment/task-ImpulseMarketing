@@ -11,18 +11,7 @@ if ($this->checkModule()) {
         ->setPageSize($elementsCount)
         ->initFromUri();
 
-    $arOrder = [];
-    if ($_REQUEST["sort_id"])
-        $arOrder["ID"] = ((strip_tags(htmlspecialchars($_REQUEST["sort_id"])) == "ASC") ? "ASC" : "DESC");
-    if ($_REQUEST["sort_code"])
-        $arOrder["CODE"] = ((strip_tags(htmlspecialchars($_REQUEST["sort_code"])) == "ASC") ? "ASC" : "DESC");
-    if ($_REQUEST["sort_date"])
-        $arOrder["DATE"] = ((strip_tags(htmlspecialchars($_REQUEST["sort_date"])) == "ASC") ? "ASC" : "DESC");
-    if ($_REQUEST["sort_course"])
-        $arOrder["COURSE"] = ((strip_tags(htmlspecialchars($_REQUEST["sort_course"])) == "ASC") ? "ASC" : "DESC");
-
-    if (!$arOrder)
-        $arOrder["ID"] = "DESC";
+    $arOrder = $this->setArOrder();
 
     $bUSER_HAVE_ACCESS = !$arParams["USE_PERMISSIONS"];
     if ($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()), $bUSER_HAVE_ACCESS, $arOrder, $nav))) {
