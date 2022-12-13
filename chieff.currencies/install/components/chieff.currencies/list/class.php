@@ -4,7 +4,7 @@ use \Bitrix\Main\Loader;
 use \Bitrix\Main\Localization\Loc;
 use \Bitrix\Main\Type;
 
-class Book extends CBitrixComponent {
+class Currencies extends CBitrixComponent {
 
     protected function checkModule() {
         if (!Loader::includeModule("chieff.currencies")) {

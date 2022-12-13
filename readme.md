@@ -35,8 +35,8 @@ $APPLICATION->IncludeComponent(
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "0",
+		"CACHE_TYPE" => "N",
 		"COMPONENT_TEMPLATE" => ".default",
 		"ELEMENTS_COUNT" => "10",
 		"SET_TITLE" => "Y"

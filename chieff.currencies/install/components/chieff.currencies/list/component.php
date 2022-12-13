@@ -2,7 +2,8 @@
 
 if ($this->checkModule()) {
 
-    $APPLICATION->SetTitle("Модуль валют");
+    if ($arParams["SET_TITLE"] == "Y")
+        $APPLICATION->SetTitle("Модуль валют");
 
     $elementsCount = ($arParams["ELEMENTS_COUNT"]) ? $arParams["ELEMENTS_COUNT"] : 10;
 
