@@ -14,8 +14,14 @@ if ($this->checkModule()) {
 
     $arOrder = $this->setArOrder();
 
-    $bUSER_HAVE_ACCESS = !$arParams["USE_PERMISSIONS"];
-    if ($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()), $bUSER_HAVE_ACCESS, $arOrder, $nav))) {
+    $bUSER_HAVE_ACCESS = $arParams["USE_PERMISSIONS"] ?? "";
+
+    $cachePath = "/" . SITE_ID . $this->GetRelativePath();
+    if ($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()), $bUSER_HAVE_ACCESS, $arOrder, $nav), $cachePath)) {
+
+        global $CACHE_MANAGER; // или $taggedCache = \Bitrix\Main\Application::getInstance()->getTaggedCache();
+        $CACHE_MANAGER->StartTagCache($cachePath);
+        $CACHE_MANAGER->RegisterTag("currencies_tag");
 
         $result = \chieff\currencies\CurrenciesTable::getList(array(
             "order" => $arOrder,
@@ -28,6 +34,7 @@ if ($this->checkModule()) {
         $arResult["ITEMS"] = $result->fetchAll();
         $arResult["NAV"] = $nav;
 
+        $CACHE_MANAGER->EndTagCache();
         $this->IncludeComponentTemplate();
     }
 

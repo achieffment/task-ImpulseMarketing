@@ -45,4 +45,21 @@ class CurrenciesTable extends Entity\DataManager {
         );
     }
 
+    public static function onAfterAdd(Entity\Event $event) {
+        CurrenciesTable::clearCache();
+    }
+
+    public static function onAfterUpdate(Entity\Event $event) {
+        CurrenciesTable::clearCache();
+    }
+
+    public static function onAfterDelete(Entity\Event $event) {
+        CurrenciesTable::clearCache();
+    }
+
+    public function clearCache() {
+        global $CACHE_MANAGER;
+        $CACHE_MANAGER->clearByTag('currencies_tag');
+    }
+
 }
